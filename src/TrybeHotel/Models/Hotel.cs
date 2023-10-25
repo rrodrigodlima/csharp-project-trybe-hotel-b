@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Hotel
 {
   public int HotelId { get; set; } // Chave primária
-  public string? Name { get; set; }
-  public string? Address { get; set; }
+  public string Name { get; set; } = string.Empty;
+  public string Address { get; set; } = string.Empty;
   public int CityId { get; set; } // Chave estrangeira para a model City
   // Propriedade de navegação para os quartos
   public ICollection<Room>? Rooms { get; set; }
