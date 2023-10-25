@@ -22,18 +22,18 @@ namespace TrybeHotel.Controllers
         [Authorize(Policy = "Admin")]
         public IActionResult GetUsers()
         {
-            var users = _repository.GetUsers();
+            IEnumerable<UserDto> response = _repository.GetUsers();
 
-            return Ok(users);
+            return Ok(response);
         }
 
         [HttpPost]
         public IActionResult Add([FromBody] UserDtoInsert user)
         {
-            var existingUser = _repository.GetUserByEmail(user.Email);
-            if (existingUser != null) return Conflict(new { message = "User email already exists" });
+            if (_repository.UserEmailExists(user.Email)) return Conflict(new { message = "User email already exists" });
+            UserDto response = _repository.Add(user);
 
-            return Created("", _repository.Add(user));
+            return Created("", response);
         }
     }
 }

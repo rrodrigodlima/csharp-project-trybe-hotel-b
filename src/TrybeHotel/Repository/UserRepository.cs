@@ -12,40 +12,45 @@ namespace TrybeHotel.Repository
         }
         public UserDto GetUserById(int userId)
         {
-            throw new NotImplementedException();
-        }
+            User user = _context.Users!.FirstOrDefault(u => u.UserId == userId) ?? throw new Exception("Usuário não encontrado");
 
-        public UserDto Login(LoginDto login)
-        {
-            // Verificar se as credenciais (e-mail e senha) são válidas
-            var user = _context.Users.FirstOrDefault(u => u.Email == login.Email && u.Password == login.Password);
-
-            if (user == null)
-            {
-                return null; // Credenciais incorretas
-            }
-
-            // Preparar o DTO do usuário
-            var userDto = new UserDto
+            return new UserDto
             {
                 UserId = user.UserId,
                 Name = user.Name,
                 Email = user.Email,
                 UserType = user.UserType
             };
+        }
 
-            return userDto;
+        public UserDto Login(LoginDto login)
+        {
+            // Verificar se as credenciais (e-mail e senha) são válidas
+            User user = _context.Users!.FirstOrDefault(u => u.Email == login.Email) ?? throw new Exception("Usuário não encontrado");
+            if (user.Password != login.Password) throw new Exception("Senha incorreta");
+
+            // Preparar o DTO do usuário
+            return new UserDto
+            {
+                UserId = user.UserId,
+                Name = user.Name,
+                Email = user.Email,
+                UserType = user.UserType
+            };
         }
         public UserDto Add(UserDtoInsert user)
         {
+            int? lastId = _context.Users!.OrderBy(u => u.UserId).LastOrDefault()?.UserId;
+            int newId = (int)(lastId == null ? 1 : lastId + 1);
             User newUser = new()
             {
+                UserId = newId,
                 Name = user.Name,
                 Email = user.Email,
-                Password = user.Password
+                Password = user.Password,
             };
 
-            _context.Users.Add(newUser);
+            _context.Users!.Add(newUser);
             _context.SaveChanges();
 
             return new UserDto
@@ -59,31 +64,33 @@ namespace TrybeHotel.Repository
 
         public UserDto GetUserByEmail(string userEmail)
         {
-            User user = _context.Users.FirstOrDefault(u => u.Email == userEmail) ?? throw new Exception("Usuário não encontrado");
+            User user = _context.Users!.FirstOrDefault(u => u.Email == userEmail) ?? throw new Exception("Usuário não encontrado");
 
-            return new UserDto
+            var data = new UserDto
             {
                 UserId = user.UserId,
-                Name = user.Name,
                 Email = user.Email,
+                Name = user.Name,
                 UserType = user.UserType
             };
+
+            return data;
         }
 
         public IEnumerable<UserDto> GetUsers()
         {
-            var users = _context.Users
-                .Select(u => new UserDto
-                {
-                    UserId = u.UserId,
-                    Name = u.Name,
-                    Email = u.Email,
-                    UserType = u.UserType
-                })
-                .ToList();
-
-            return users;
+            return _context.Users!.Select(u => new UserDto
+            {
+                UserId = u.UserId,
+                Name = u.Name,
+                Email = u.Email,
+                UserType = u.UserType
+            });
         }
 
+        public bool UserEmailExists(string userEmail)
+        {
+            return _context.Users!.Any(u => u.Email == userEmail);
+        }
     }
 }
