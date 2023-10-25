@@ -11,7 +11,7 @@ namespace TrybeHotel.Controllers
 {
     [ApiController]
     [Route("booking")]
-  
+
     public class BookingController : Controller
     {
         private readonly IBookingRepository _repository;
@@ -21,14 +21,39 @@ namespace TrybeHotel.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] BookingDtoInsert bookingInsert){
-            throw new NotImplementedException();
+        [Authorize(Policy = "Client")]
+        public IActionResult Add([FromBody] BookingDtoInsert bookingInsert)
+        {
+            try
+            {
+                var tokenIdentity = HttpContext.User.Identity as ClaimsIdentity;
+                var email = tokenIdentity?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+
+                if (email == null)
+                {
+                    return BadRequest(new { message = "Unable to extract email from token" });
+                }
+
+                var response = _repository.Add(bookingInsert, email);
+
+                if (response == null)
+                {
+                    return BadRequest(new { message = "Guest quantity over room capacity" });
+                }
+
+                return Created("", response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
         }
 
 
         [HttpGet("{Bookingid}")]
-        public IActionResult GetBooking(int Bookingid){
-           throw new NotImplementedException();
+        public IActionResult GetBooking(int Bookingid)
+        {
+            throw new NotImplementedException();
         }
     }
 }

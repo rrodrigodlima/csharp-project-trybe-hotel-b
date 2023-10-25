@@ -8,5 +8,6 @@ namespace TrybeHotel.Repository
         BookingResponse Add(BookingDtoInsert booking, string email);
         Room GetRoomById(int RoomId);
         BookingResponse GetBooking(int bookingId, string email);
+        object GetUserByEmail(string? name);
     }
 }
