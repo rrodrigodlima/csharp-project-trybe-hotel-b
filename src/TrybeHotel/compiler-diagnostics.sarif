@@ -267,9 +267,9 @@
               "resultFile": {
                 "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/BookingRepository.cs",
                 "region": {
-                  "startLine": 68,
+                  "startLine": 66,
                   "startColumn": 60,
-                  "endLine": 68,
+                  "endLine": 66,
                   "endColumn": 66
                 }
               }
@@ -288,9 +288,9 @@
               "resultFile": {
                 "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/BookingRepository.cs",
                 "region": {
-                  "startLine": 77,
+                  "startLine": 75,
                   "startColumn": 37,
-                  "endLine": 77,
+                  "endLine": 75,
                   "endColumn": 43
                 }
               }
@@ -309,9 +309,9 @@
               "resultFile": {
                 "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/BookingRepository.cs",
                 "region": {
-                  "startLine": 83,
+                  "startLine": 81,
                   "startColumn": 42,
-                  "endLine": 83,
+                  "endLine": 81,
                   "endColumn": 54
                 }
               }
@@ -330,9 +330,9 @@
               "resultFile": {
                 "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/BookingRepository.cs",
                 "region": {
-                  "startLine": 86,
+                  "startLine": 84,
                   "startColumn": 41,
-                  "endLine": 86,
+                  "endLine": 84,
                   "endColumn": 58
                 }
               }

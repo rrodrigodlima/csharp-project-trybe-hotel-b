@@ -51,6 +51,7 @@ namespace TrybeHotel.Controllers
 
 
         [HttpGet("{Bookingid}")]
+        [Authorize(Policy = "Client")]
         public IActionResult GetBooking(int Bookingid)
         {
             string user = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value ?? throw new Exception("User not logged");

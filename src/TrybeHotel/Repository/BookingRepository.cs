@@ -11,7 +11,6 @@ namespace TrybeHotel.Repository
         {
             _context = context;
         }
-        [Authorize(Policy = "Client")]
         public BookingResponse Add(BookingDtoInsert booking, string email)
         {
             Room room = _context.Rooms.FirstOrDefault(r => r.RoomId == booking.RoomId) ?? throw new Exception("Quarto não encontrado");
@@ -61,7 +60,6 @@ namespace TrybeHotel.Repository
                 }
             };
         }
-        [Authorize(Policy = "Client")]
         public BookingResponse GetBooking(int bookingId, string email)
         {
             var booking = _context.Bookings
@@ -100,9 +98,10 @@ namespace TrybeHotel.Repository
 
         public Room GetRoomById(int RoomId)
         {
-            throw new NotImplementedException();
-        }
+            Room room = _context.Rooms!.FirstOrDefault(r => r.RoomId == RoomId) ?? throw new Exception("Quarto não encontrado");
 
+            return room;
+        }
         public object GetUserByEmail(string? name)
         {
             throw new NotImplementedException();

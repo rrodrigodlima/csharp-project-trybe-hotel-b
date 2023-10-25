@@ -35,6 +35,10 @@ namespace TrybeHotel.Repository
         // 5. Desenvolva o endpoint POST /hotel
         public HotelDto AddHotel(Hotel hotel)
         {
+            int? lastId = _context.Hotels!.OrderBy(h => h.HotelId).LastOrDefault()?.HotelId;
+            int newId = (int)(lastId == null ? 1 : lastId + 1);
+            hotel.HotelId = newId;
+
             // Adiciona o novo hotel ao contexto
             _context.Hotels.Add(hotel);
             _context.SaveChanges();
