@@ -28,6 +28,27 @@
           }
         },
         {
+          "ruleId": "CS8767",
+          "level": "warning",
+          "message": "A nulidade de tipos de referência no tipo de parâmetro 'userEmail' de 'bool UserRepository.UserEmailExists(string userEmail)' não corresponde ao membro implementado implicitamente 'bool IUserRepository.UserEmailExists(string? email)' (possivelmente devido a atributos de nulidade).",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 91,
+                  "startColumn": 21,
+                  "endLine": 91,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
           "ruleId": "CS8766",
           "level": "warning",
           "message": "A nulidade de tipos de referência no tipo de retorno 'DbSet<City>? TrybeHotelContext.Cities.get' não corresponde ao membro implementado implicitamente 'DbSet<City> ITrybeHotelContext.Cities.get' (possivelmente devido a atributos de nulidade).",
@@ -133,27 +154,6 @@
           }
         },
         {
-          "ruleId": "CS8767",
-          "level": "warning",
-          "message": "A nulidade de tipos de referência no tipo de parâmetro 'userEmail' de 'bool UserRepository.UserEmailExists(string userEmail)' não corresponde ao membro implementado implicitamente 'bool IUserRepository.UserEmailExists(string? email)' (possivelmente devido a atributos de nulidade).",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/UserRepository.cs",
-                "region": {
-                  "startLine": 91,
-                  "startColumn": 21,
-                  "endLine": 91,
-                  "endColumn": 36
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
           "ruleId": "CS8618",
           "level": "warning",
           "message": "O propriedade não anulável 'Secret' precisa conter um valor não nulo ao sair do construtor. Considere declarar o propriedade como anulável.",
@@ -175,38 +175,17 @@
           }
         },
         {
-          "ruleId": "CS8604",
+          "ruleId": "CS8603",
           "level": "warning",
-          "message": "Possível argumento de referência nula para o parâmetro 'value' em 'Claim.Claim(string type, string value)'.",
+          "message": "Possível retorno de referência nula.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Services/TokenGenerator.cs",
+                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/UserRepository.cs",
                 "region": {
-                  "startLine": 31,
-                  "startColumn": 44,
-                  "endLine": 31,
-                  "endColumn": 54
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CS8602",
-          "level": "warning",
-          "message": "Desreferência de uma referência possivelmente nula.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Controllers/BookingController.cs",
-                "region": {
-                  "startLine": 59,
-                  "startColumn": 29,
-                  "endLine": 59,
+                  "startLine": 30,
+                  "startColumn": 38,
+                  "endLine": 30,
                   "endColumn": 42
                 }
               }
@@ -217,18 +196,60 @@
           }
         },
         {
-          "ruleId": "CS8602",
+          "ruleId": "CS8601",
           "level": "warning",
-          "message": "Desreferência de uma referência possivelmente nula.",
+          "message": "Possível atribuição de referência nula.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Controllers/BookingController.cs",
+                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/UserRepository.cs",
                 "region": {
-                  "startLine": 59,
-                  "startColumn": 29,
-                  "endLine": 59,
-                  "endColumn": 97
+                  "startLine": 48,
+                  "startColumn": 24,
+                  "endLine": 48,
+                  "endColumn": 33
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8601",
+          "level": "warning",
+          "message": "Possível atribuição de referência nula.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 49,
+                  "startColumn": 25,
+                  "endLine": 49,
+                  "endColumn": 35
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8601",
+          "level": "warning",
+          "message": "Possível atribuição de referência nula.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/UserRepository.cs",
+                "region": {
+                  "startLine": 50,
+                  "startColumn": 28,
+                  "endLine": 50,
+                  "endColumn": 41
                 }
               }
             }
@@ -364,9 +385,9 @@
               "resultFile": {
                 "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Services/TokenGenerator.cs",
                 "region": {
-                  "startLine": 42,
+                  "startLine": 40,
                   "startColumn": 32,
-                  "endLine": 42,
+                  "endLine": 40,
                   "endColumn": 41
                 }
               }
@@ -424,6 +445,20 @@
             ]
           }
         },
+        "CS8601": {
+          "id": "CS8601",
+          "shortDescription": "Possível atribuição de referência nula.",
+          "defaultLevel": "warning",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8601)",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
         "CS8602": {
           "id": "CS8602",
           "shortDescription": "Desreferência de uma referência possivelmente nula.",
@@ -438,11 +473,11 @@
             ]
           }
         },
-        "CS8604": {
-          "id": "CS8604",
-          "shortDescription": "Possível argumento de referência nula.",
+        "CS8603": {
+          "id": "CS8603",
+          "shortDescription": "Possível retorno de referência nula.",
           "defaultLevel": "warning",
-          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8604)",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8603)",
           "properties": {
             "category": "Compiler",
             "isEnabledByDefault": true,

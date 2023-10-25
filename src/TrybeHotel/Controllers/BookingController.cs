@@ -53,27 +53,22 @@ namespace TrybeHotel.Controllers
         [HttpGet("{Bookingid}")]
         public IActionResult GetBooking(int Bookingid)
         {
+            string user = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value ?? throw new Exception("User not logged");
+
             try
             {
-                var tokenIdentity = HttpContext.User.Identity as ClaimsIdentity;
-                var email = tokenIdentity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value;
-
-                var booking = _repository.GetBooking(Bookingid, email);
-
-                if (booking == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(booking);
+                BookingResponse bookingResponse = _repository.GetBooking(Bookingid, user);
+                return Ok(bookingResponse);
             }
-            catch (KeyNotFoundException)
+            catch (UnauthorizedAccessException e)
             {
-                return NotFound();
+                Console.WriteLine(e.Message);
+                return Unauthorized();
             }
             catch (Exception e)
             {
-                return BadRequest(new { message = e.Message });
+                Console.WriteLine(e.Message);
+                return NotFound(new { message = e.Message });
             }
         }
     }

@@ -6,9 +6,10 @@ namespace TrybeHotel.Models
     // 1. Implemente as models da aplicação
     public class City
     {
-        public int CityId { get; set; } // Chave primária
+        [Key]
+        public int CityId { get; set; }
         public string Name { get; set; } = string.Empty;
-        // Propriedade de navegação para os hotéis
+        [InverseProperty("City")]
         public ICollection<Hotel>? Hotels { get; set; }
     }
 }

@@ -22,17 +22,10 @@ namespace TrybeHotel.Controllers
         public IActionResult Login([FromBody] LoginDto login)
         {
             // Autenticar o usuário
-            var userDto = _repository.Login(login);
-
-            if (userDto == null)
-            {
-                return Unauthorized(new { message = "Incorrect e-mail or password" });
-            }
-
-            // Gerar o token de acesso
-            var token = new TokenGenerator().Generate(userDto);
-
-            return Ok(new { token });
+            var verifyUser = _repository.Login(login);
+            if (verifyUser == null) return StatusCode(401, new { message = "Incorrect e-mail or password" });
+            var token = new TokenGenerator().Generate(verifyUser);
+            return StatusCode(200, new { token });
         }
     }
 }

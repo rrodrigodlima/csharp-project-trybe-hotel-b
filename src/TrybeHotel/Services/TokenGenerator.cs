@@ -23,15 +23,13 @@ namespace TrybeHotel.Services
         public string Generate(UserDto user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("chave_secreta"); // Substitua pela sua chave secreta
+            var key = Encoding.ASCII.GetBytes(_tokenOptions.Secret);
+            var claims = AddClaims(user);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                new Claim(ClaimTypes.Name, user.Email),
-                // Outras claims, como a função (role), se necessário
-            }),
-                Expires = DateTime.UtcNow.AddHours(1), // Define a validade do token (1 hora, por exemplo)
+                Subject = new ClaimsIdentity(claims),
+                Expires = System.DateTime.UtcNow.AddDays(_tokenOptions.ExpiresDay),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

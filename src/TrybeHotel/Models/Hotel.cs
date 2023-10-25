@@ -5,12 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 // 1. Implemente as models da aplicação
 public class Hotel
 {
-  public int HotelId { get; set; } // Chave primária
+  [Key]
+  public int HotelId { get; set; }
   public string Name { get; set; } = string.Empty;
   public string Address { get; set; } = string.Empty;
-  public int CityId { get; set; } // Chave estrangeira para a model City
-  // Propriedade de navegação para os quartos
+  public int CityId { get; set; }
+  [InverseProperty("Hotel")]
   public ICollection<Room>? Rooms { get; set; }
+  [ForeignKey("CityId")]
   public City? City { get; set; }
   // Propriedade de navegação para a cidade
 }
