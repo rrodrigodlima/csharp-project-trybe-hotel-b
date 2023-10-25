@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using TrybeHotel.Models;
 using TrybeHotel.Dto;
 using TrybeHotel.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TrybeHotel.Controllers
 {
@@ -27,6 +28,7 @@ namespace TrybeHotel.Controllers
 
         // 7. Desenvolva o endpoint POST /room
         [HttpPost]
+        [Authorize(Policy = "Admin")]
         public IActionResult PostRoom([FromBody] Room room)
         {
             RoomDto response = _repository.AddRoom(room);
@@ -36,6 +38,7 @@ namespace TrybeHotel.Controllers
 
         // 8. Desenvolva o endpoint DELETE /room/:roomId
         [HttpDelete("{RoomId}")]
+        [Authorize(Policy = "Admin")]
         public IActionResult Delete(int RoomId)
         {
             // Chame o método DeleteRoom() do repositório para excluir o quarto
