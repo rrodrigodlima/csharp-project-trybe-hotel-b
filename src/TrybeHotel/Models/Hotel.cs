@@ -9,10 +9,8 @@ public class Hotel
   public string? Name { get; set; }
   public string? Address { get; set; }
   public int CityId { get; set; } // Chave estrangeira para a model City
-
   // Propriedade de navegação para os quartos
-  public List<Room>? Rooms { get; set; }
-
-  // Propriedade de navegação para a cidade
+  public ICollection<Room>? Rooms { get; set; }
   public City? City { get; set; }
+  // Propriedade de navegação para a cidade
 }

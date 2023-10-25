@@ -10,6 +10,6 @@ namespace TrybeHotel.Models
         public string? Name { get; set; }
 
         // Propriedade de navegação para os hotéis
-        public List<Hotel>? Hotels { get; set; }
+        public ICollection<Hotel>? Hotels { get; set; }
     }
 }
