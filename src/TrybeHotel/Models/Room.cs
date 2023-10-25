@@ -13,4 +13,5 @@ public class Room
 
   // Propriedade de navegação para o hotel
   public Hotel? Hotel { get; set; }
+  public ICollection<Booking>? Bookings { get; set; }
 }
