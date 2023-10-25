@@ -39,20 +39,16 @@ namespace TrybeHotel.Repository
             _context.Hotels.Add(hotel);
             _context.SaveChanges();
 
-            // Consulta a cidade relacionada para obter o nome da cidade
-            var city = _context.Cities.First(c => c.CityId == hotel.CityId);
+            string? cityName = _context.Cities!.FirstOrDefault(c => c.CityId == hotel.CityId)?.Name;
 
-            // Mapeia o novo hotel e a cidade relacionada para o formato HotelDto e retorna
-            var addedHotelDto = new HotelDto
+            return new HotelDto
             {
                 HotelId = hotel.HotelId,
                 Name = hotel.Name,
                 Address = hotel.Address,
                 CityId = hotel.CityId,
-                CityName = city.Name
+                CityName = cityName
             };
-
-            return addedHotelDto;
         }
     }
 }

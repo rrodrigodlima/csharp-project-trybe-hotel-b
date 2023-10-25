@@ -14,24 +14,21 @@ namespace TrybeHotel.Repository
         // 6. Desenvolva o endpoint GET /room/:hotelId
         public IEnumerable<RoomDto> GetRooms(int HotelId)
         {
-            var rooms = _context.Rooms
-                         .Where(r => r.HotelId == HotelId)
-                         .Select(room => new RoomDto
-                         {
-                             RoomId = room.RoomId,
-                             Name = room.Name,
-                             Capacity = room.Capacity,
-                             Image = room.Image,
-                             Hotel = new HotelDto
-                             {
-                                 HotelId = HotelId,
-                                 Name = room.Hotel.Name,
-                                 Address = room.Hotel.Address,
-                                 CityId = room.Hotel.CityId,
-                                 CityName = room.Hotel.City.Name
-                             }
-                         })
-                         .ToList();
+            IEnumerable<RoomDto> rooms = _context.Rooms!.Where(r => r.HotelId == HotelId).Select(r => new RoomDto
+            {
+                RoomId = r.RoomId,
+                Name = r.Name,
+                Capacity = r.Capacity,
+                Image = r.Image,
+                Hotel = new HotelDto
+                {
+                    HotelId = HotelId,
+                    Name = r.Hotel!.Name,
+                    Address = r.Hotel.Address,
+                    CityId = r.Hotel.CityId,
+                    CityName = r.Hotel.City!.Name
+                }
+            });
 
             return rooms;
         }
@@ -43,9 +40,9 @@ namespace TrybeHotel.Repository
             _context.Rooms.Add(room);
             _context.SaveChanges();
 
-            Hotel? hotel = _context.Hotels.FirstOrDefault(h => h.HotelId == room.HotelId);
+            Hotel? hotel = _context.Hotels!.FirstOrDefault(h => h.HotelId == room.HotelId);
 
-            string? cityName = _context.Cities.FirstOrDefault(c => c.CityId == hotel.CityId)?.Name;
+            string? cityName = _context.Cities!.FirstOrDefault(c => c.CityId == hotel!.CityId)!.Name;
 
             return new RoomDto
             {
@@ -56,7 +53,7 @@ namespace TrybeHotel.Repository
                 Hotel = new HotelDto
                 {
                     HotelId = room.HotelId,
-                    Name = hotel.Name,
+                    Name = hotel!.Name,
                     Address = hotel.Address,
                     CityId = hotel.CityId,
                     CityName = cityName

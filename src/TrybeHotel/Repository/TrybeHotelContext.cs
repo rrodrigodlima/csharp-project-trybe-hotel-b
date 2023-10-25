@@ -23,5 +23,25 @@ public class TrybeHotelContext : DbContext, ITrybeHotelContext
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {}
+    {
+        modelBuilder.Entity<City>().ToTable("City");
+        modelBuilder.Entity<Hotel>().ToTable("Hotel");
+        modelBuilder.Entity<Room>().ToTable("Room");
+
+        modelBuilder.Entity<City>()
+                    .HasMany(c => c.Hotels)
+                    .WithOne(h => h.City)
+                    .HasForeignKey(h => h.CityId);
+
+        modelBuilder.Entity<Hotel>()
+                    .HasMany(h => h.Rooms)
+                    .WithOne(r => r.Hotel)
+                    .HasForeignKey(r => r.HotelId);
+
+        modelBuilder.Entity<Room>()
+                    .HasOne(r => r.Hotel)
+                    .WithMany(h => h.Rooms)
+                    .HasForeignKey(r => r.RoomId);
+
+    }
 }

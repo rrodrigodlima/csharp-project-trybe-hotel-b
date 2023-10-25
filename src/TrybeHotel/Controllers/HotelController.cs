@@ -21,7 +21,7 @@ namespace TrybeHotel.Controllers
         public IActionResult GetHotels()
         {
             // Chama o método GetHotels() do repositório
-            var hotels = _repository.GetHotels();
+            IEnumerable<HotelDto> hotels = _repository.GetHotels();
 
             return Ok(hotels);
         }
@@ -31,7 +31,7 @@ namespace TrybeHotel.Controllers
         public IActionResult PostHotel([FromBody] Hotel hotel)
         {
             // Chame o método AddHotel() do repositório para inserir o hotel
-            var addedHotel = _repository.AddHotel(hotel);
+            HotelDto addedHotel = _repository.AddHotel(hotel);
 
             return CreatedAtAction(nameof(GetHotels), addedHotel);
         }

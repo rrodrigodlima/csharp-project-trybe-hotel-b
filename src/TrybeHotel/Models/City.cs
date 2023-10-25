@@ -7,8 +7,7 @@ namespace TrybeHotel.Models
     public class City
     {
         public int CityId { get; set; } // Chave primária
-        public string? Name { get; set; }
-
+        public string Name { get; set; } = string.Empty;
         // Propriedade de navegação para os hotéis
         public ICollection<Hotel>? Hotels { get; set; }
     }

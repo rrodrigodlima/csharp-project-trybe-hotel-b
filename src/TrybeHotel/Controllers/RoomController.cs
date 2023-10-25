@@ -20,7 +20,7 @@ namespace TrybeHotel.Controllers
         public IActionResult GetRoom(int HotelId)
         {
             // Chama o método GetRooms() do repositório para obter a lista de quartos
-            var rooms = _repository.GetRooms(HotelId);
+            IEnumerable<RoomDto> rooms = _repository.GetRooms(HotelId);
 
             return Ok(rooms);
         }

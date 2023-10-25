@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TrybeHotel.Models;
 using TrybeHotel.Repository;
+using TrybeHotel.Dto;
 
 namespace TrybeHotel.Controllers
 {
@@ -19,7 +20,7 @@ namespace TrybeHotel.Controllers
         public IActionResult GetCities()
         {
             // Chama o método GetCities() do repositório
-            var cities = _repository.GetCities();
+            IEnumerable<CityDto> cities = _repository.GetCities();
 
             return Ok(cities);
         }
@@ -29,9 +30,9 @@ namespace TrybeHotel.Controllers
         public IActionResult PostCity([FromBody] City city)
         {
             // Chame o método AddCity() do repositório para inserir a cidade
-            var addedCity = _repository.AddCity(city);
+            CityDto addedCity = _repository.AddCity(city);
 
-            return CreatedAtAction(nameof(GetCities), addedCity);
+            return Created("", addedCity);
         }
     }
 }
