@@ -53,7 +53,28 @@ namespace TrybeHotel.Controllers
         [HttpGet("{Bookingid}")]
         public IActionResult GetBooking(int Bookingid)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var tokenIdentity = HttpContext.User.Identity as ClaimsIdentity;
+                var email = tokenIdentity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value;
+
+                var booking = _repository.GetBooking(Bookingid, email);
+
+                if (booking == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(booking);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
         }
     }
 }

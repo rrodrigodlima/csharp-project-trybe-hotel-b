@@ -1,5 +1,6 @@
 using TrybeHotel.Models;
 using TrybeHotel.Dto;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TrybeHotel.Repository
 {
@@ -10,7 +11,7 @@ namespace TrybeHotel.Repository
         {
             _context = context;
         }
-
+        [Authorize(Policy = "Client")]
         public BookingResponse Add(BookingDtoInsert booking, string email)
         {
             Room room = _context.Rooms.FirstOrDefault(r => r.RoomId == booking.RoomId) ?? throw new Exception("Quarto não encontrado");
@@ -60,10 +61,41 @@ namespace TrybeHotel.Repository
                 }
             };
         }
-
+        [Authorize(Policy = "Client")]
         public BookingResponse GetBooking(int bookingId, string email)
         {
-            throw new NotImplementedException();
+            var booking = _context.Bookings
+                   .Where(b => b.BookingId == bookingId && b.User.Email == email)
+                   .Select(b => new BookingResponse
+                   {
+                       BookingId = b.BookingId,
+                       CheckIn = b.CheckIn,
+                       CheckOut = b.CheckOut,
+                       GuestQuant = b.GuestQuant,
+                       Room = new RoomDto
+                       {
+                           RoomId = b.Room.RoomId,
+                           Name = b.Room.Name,
+                           Capacity = b.Room.Capacity,
+                           Image = b.Room.Image,
+                           Hotel = new HotelDto
+                           {
+                               HotelId = b.Room.Hotel.HotelId,
+                               Name = b.Room.Hotel.Name,
+                               Address = b.Room.Hotel.Address,
+                               CityId = b.Room.Hotel.City.CityId,
+                               CityName = b.Room.Hotel.City.Name
+                           }
+                       }
+                   })
+                   .FirstOrDefault();
+
+            if (booking == null)
+            {
+                throw new KeyNotFoundException("Booking not found");
+            }
+
+            return booking;
         }
 
         public Room GetRoomById(int RoomId)
