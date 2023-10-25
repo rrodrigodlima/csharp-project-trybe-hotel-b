@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using TrybeHotel.Models;
-
 namespace TrybeHotel.Repository;
 public class TrybeHotelContext : DbContext, ITrybeHotelContext
 {
@@ -9,10 +8,12 @@ public class TrybeHotelContext : DbContext, ITrybeHotelContext
     public DbSet<Room>? Rooms { get; set; }
     public DbSet<User>? Users { get; set; }
     public DbSet<Booking>? Bookings { get; set; }
-    public TrybeHotelContext(DbContextOptions<TrybeHotelContext> options) : base(options)
-    {
+
+    public TrybeHotelContext(DbContextOptions<TrybeHotelContext> options) : base(options) {
         Seeder.SeedUserAdmin(this);
     }
+    public TrybeHotelContext() { }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -44,4 +45,5 @@ public class TrybeHotelContext : DbContext, ITrybeHotelContext
                     .WithOne(b => b.Room)
                     .HasForeignKey(b => b.RoomId);
     }
+
 }
