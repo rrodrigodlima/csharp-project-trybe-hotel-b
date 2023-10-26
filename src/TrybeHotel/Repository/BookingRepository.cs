@@ -62,38 +62,51 @@ namespace TrybeHotel.Repository
         }
         public BookingResponse GetBooking(int bookingId, string email)
         {
-            var booking = _context.Bookings
-                   .Where(b => b.BookingId == bookingId && b.User.Email == email)
-                   .Select(b => new BookingResponse
-                   {
-                       BookingId = b.BookingId,
-                       CheckIn = b.CheckIn,
-                       CheckOut = b.CheckOut,
-                       GuestQuant = b.GuestQuant,
-                       Room = new RoomDto
-                       {
-                           RoomId = b.Room.RoomId,
-                           Name = b.Room.Name,
-                           Capacity = b.Room.Capacity,
-                           Image = b.Room.Image,
-                           Hotel = new HotelDto
-                           {
-                               HotelId = b.Room.Hotel.HotelId,
-                               Name = b.Room.Hotel.Name,
-                               Address = b.Room.Hotel.Address,
-                               CityId = b.Room.Hotel.City.CityId,
-                               CityName = b.Room.Hotel.City.Name
-                           }
-                       }
-                   })
-                   .FirstOrDefault();
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            var findBooking = _context.Bookings.FirstOrDefault(b => b.BookingId == bookingId);
 
-            if (booking == null)
+            if (findBooking == null)
             {
                 throw new KeyNotFoundException("Booking not found");
             }
 
-            return booking;
+            if (user.UserId != findBooking.UserId)
+            {
+                throw new Exception("This Booking doesn't belong to this user");
+            }
+
+            var bookingResponse = (from booking in _context.Bookings
+                                   where booking.BookingId == bookingId
+                                   select new BookingResponse
+                                   {
+                                       BookingId = booking.BookingId,
+                                       CheckIn = booking.CheckIn,
+                                       CheckOut = booking.CheckOut,
+                                       GuestQuant = booking.GuestQuant,
+                                       Room = (from room in _context.Rooms
+                                               where room.RoomId == booking.RoomId
+                                               select new RoomDto
+                                               {
+                                                   Capacity = room.Capacity,
+                                                   RoomId = room.RoomId,
+                                                   Image = room.Image,
+                                                   Name = room.Name,
+                                                   Hotel = (from hotel in _context.Hotels
+                                                            where hotel.HotelId == room.HotelId
+                                                            select new HotelDto
+                                                            {
+                                                                Address = hotel.Address,
+                                                                CityId = hotel.CityId,
+                                                                HotelId = hotel.HotelId,
+                                                                Name = hotel.Name,
+                                                                CityName = (from city in _context.Cities
+                                                                            where city.CityId == hotel.CityId
+                                                                            select city.Name).First()
+                                                            }).First()
+                                               }).First()
+                                   }).ToList();
+
+            return bookingResponse.First();
         }
 
         public Room GetRoomById(int RoomId)

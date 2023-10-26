@@ -265,12 +265,33 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/BookingRepository.cs",
+                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Controllers/BookingController.cs",
                 "region": {
-                  "startLine": 66,
-                  "startColumn": 60,
-                  "endLine": 66,
-                  "endColumn": 66
+                  "startLine": 60,
+                  "startColumn": 29,
+                  "endLine": 60,
+                  "endColumn": 34
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8602",
+          "level": "warning",
+          "message": "Desreferência de uma referência possivelmente nula.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Controllers/BookingController.cs",
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 29,
+                  "endLine": 60,
+                  "endColumn": 89
                 }
               }
             }
@@ -288,52 +309,10 @@
               "resultFile": {
                 "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/BookingRepository.cs",
                 "region": {
-                  "startLine": 75,
-                  "startColumn": 37,
-                  "endLine": 75,
-                  "endColumn": 43
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CS8602",
-          "level": "warning",
-          "message": "Desreferência de uma referência possivelmente nula.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/BookingRepository.cs",
-                "region": {
-                  "startLine": 81,
-                  "startColumn": 42,
-                  "endLine": 81,
-                  "endColumn": 54
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CS8602",
-          "level": "warning",
-          "message": "Desreferência de uma referência possivelmente nula.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///home/skanda/trybe-projects/csharp-027-csharp-projeto-trybe-hotel-fase-b/src/TrybeHotel/Repository/BookingRepository.cs",
-                "region": {
-                  "startLine": 84,
-                  "startColumn": 41,
-                  "endLine": 84,
-                  "endColumn": 58
+                  "startLine": 73,
+                  "startColumn": 17,
+                  "endLine": 73,
+                  "endColumn": 21
                 }
               }
             }
